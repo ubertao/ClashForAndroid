@@ -2,6 +2,8 @@
 
 #include <android/log.h>
 
+#include <sys/system_properties.h>
+
 Master *Master::master = nullptr;
 
 template <class T>
@@ -15,7 +17,15 @@ Master::Master(JavaVM *vm, JNIEnv *env): vm(vm) {
     cClashException = g<jclass>(env, env->FindClass("com/github/kr328/clash/core/bridge/ClashException"));
     cTraffic = g<jclass>(env, env->FindClass("com/github/kr328/clash/core/model/Traffic"));
     cGeneral = g<jclass>(env, env->FindClass("com/github/kr328/clash/core/model/General"));
-    cCompletableFuture = g<jclass>(env, env->FindClass("java/util/concurrent/CompletableFuture"));
+    char sdkVerStr[PROP_VALUE_MAX] = "-1";
+    __system_property_get("ro.build.version.sdk", sdkVerStr);
+    int sdkVerInt = atoi(sdkVerStr);
+    // use java9.util.concurrent.CompletableFuture from android-retrofuture for API level < 24
+    const char* completableFutureClassName = (sdkVerInt >= 24)
+            ? "java/util/concurrent/CompletableFuture" : "java9/util/concurrent/CompletableFuture";
+    __android_log_print(ANDROID_LOG_DEBUG, "JNI Master::Master", "SDK=%d, CompletableFuture=%s",
+            sdkVerInt, completableFutureClassName);
+    cCompletableFuture = g<jclass>(env, env->FindClass(completableFutureClassName));
     cProxyGroup = g<jclass>(env, env->FindClass("com/github/kr328/clash/core/model/ProxyGroup"));
     cProxy = g<jclass>(env, env->FindClass("com/github/kr328/clash/core/model/Proxy"));
     cLogEvent = g<jclass>(env, env->FindClass("com/github/kr328/clash/core/event/LogEvent"));

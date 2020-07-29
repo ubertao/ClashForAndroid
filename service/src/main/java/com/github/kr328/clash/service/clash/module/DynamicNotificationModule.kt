@@ -5,6 +5,7 @@ import android.app.Service
 import android.content.Intent
 import android.os.PowerManager
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
 import com.github.kr328.clash.common.Global
 import com.github.kr328.clash.common.ids.Intents
 import com.github.kr328.clash.common.ids.NotificationChannels
@@ -27,7 +28,7 @@ class DynamicNotificationModule(private val service: Service) : Module() {
     private val builder = NotificationCompat.Builder(service, NotificationChannels.CLASH_STATUS)
         .setSmallIcon(R.drawable.ic_notification)
         .setOngoing(true)
-        .setColor(service.getColor(R.color.colorAccentService))
+        .setColor(ContextCompat.getColor(service, R.color.colorAccentService))
         .setOnlyAlertOnce(true)
         .setShowWhen(false)
         .setGroup(NotificationChannels.CLASH_STATUS)
@@ -53,7 +54,7 @@ class DynamicNotificationModule(private val service: Service) : Module() {
     }
 
     override suspend fun onStart() {
-        enableTicker = service.getSystemService(PowerManager::class.java).isInteractive
+        enableTicker = ContextCompat.getSystemService(service, PowerManager::class.java)?.isInteractive ?: false
     }
 
     override suspend fun onStop() {

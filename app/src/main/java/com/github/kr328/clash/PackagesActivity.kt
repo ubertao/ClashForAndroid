@@ -1,5 +1,6 @@
 package com.github.kr328.clash
 
+import android.annotation.SuppressLint
 import android.content.pm.ApplicationInfo
 import android.os.Bundle
 import android.view.Menu
@@ -26,6 +27,7 @@ class PackagesActivity : BaseActivity() {
     private var decrease: Boolean = false
     private var systemApp: Boolean = true
 
+    @SuppressLint("NewApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

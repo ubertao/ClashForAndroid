@@ -1,7 +1,6 @@
 package com.github.kr328.clash
 
 import android.app.Activity
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
@@ -13,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import com.github.kr328.clash.common.utils.createRelativeComponentName
 import com.github.kr328.clash.common.utils.intent
 import com.github.kr328.clash.remote.withProfile
 import com.github.kr328.clash.service.model.Profile.Type
@@ -118,7 +118,7 @@ class CreateProfileActivity : BaseActivity() {
                 val type = Type.EXTERNAL
                 val intent = Intent(Constants.URL_PROVIDER_INTENT_ACTION)
                     .setComponent(
-                        ComponentName.createRelative(
+                        createRelativeComponentName(
                             activity.packageName,
                             activity.name
                         )

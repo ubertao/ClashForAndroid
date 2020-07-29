@@ -4,6 +4,7 @@ plugins {
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-android-extensions")
+    id("com.github.sgtsilvio.gradle.android-retrofix")
 }
 
 val gCompileSdkVersion: String by project
@@ -24,6 +25,8 @@ val gAppCompatVersion: String by project
 val gMaterialDesignVersion: String by project
 val gShizukuPreferenceVersion: String by project
 val gMultiprocessPreferenceVersion: String by project
+val gRetrofutureVersion: String by project
+val gRetrostreamsVersion: String by project
 
 android {
     compileSdkVersion(gCompileSdkVersion)
@@ -101,6 +104,8 @@ dependencies {
     implementation("moe.shizuku.preference:preference-simplemenu-appcompat:$gShizukuPreferenceVersion")
     implementation("com.microsoft.appcenter:appcenter-analytics:$gAppCenterVersion")
     implementation("com.microsoft.appcenter:appcenter-crashes:$gAppCenterVersion")
+    implementation("net.sourceforge.streamsupport:android-retrofuture:$gRetrofutureVersion")
+    implementation("net.sourceforge.streamsupport:android-retrostreams:$gRetrostreamsVersion")
 }
 
 task("injectAppCenterKey") {

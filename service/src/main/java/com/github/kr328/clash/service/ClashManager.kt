@@ -1,5 +1,6 @@
 package com.github.kr328.clash.service
 
+import android.annotation.SuppressLint
 import com.github.kr328.clash.core.Clash
 import com.github.kr328.clash.core.model.General
 import com.github.kr328.clash.core.model.ProxyGroupWrapper
@@ -44,6 +45,7 @@ class ClashManager(parent: CoroutineScope) :
         return data.download + data.upload
     }
 
+    @SuppressLint("NewApi")
     override fun performHealthCheck(group: String?, callback: IStreamCallback?) {
         require(group != null && callback != null)
 

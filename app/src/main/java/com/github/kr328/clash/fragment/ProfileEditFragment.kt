@@ -14,6 +14,7 @@ import android.webkit.URLUtil
 import androidx.fragment.app.Fragment
 import com.github.kr328.clash.Constants
 import com.github.kr328.clash.R
+import com.github.kr328.clash.common.utils.fromHtmlCompat
 import com.github.kr328.clash.design.common.TextInput
 import com.github.kr328.clash.design.view.CommonUiLayout
 import com.github.kr328.clash.service.model.Profile.Type
@@ -54,7 +55,7 @@ class ProfileEditFragment(
             build {
                 tips(icon = requireContext().getDrawable(R.drawable.ic_info)) {
                     title =
-                        Html.fromHtml(getString(R.string.tips_profile), Html.FROM_HTML_MODE_LEGACY)
+                        fromHtmlCompat(getString(R.string.tips_profile), Html.FROM_HTML_MODE_LEGACY)
                 }
 
                 textInput(

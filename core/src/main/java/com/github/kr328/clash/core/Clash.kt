@@ -1,5 +1,6 @@
 package com.github.kr328.clash.core
 
+import android.annotation.SuppressLint
 import android.os.ParcelFileDescriptor
 import com.github.kr328.clash.common.Global
 import com.github.kr328.clash.common.utils.Log
@@ -69,14 +70,17 @@ object Clash {
         Bridge.setDnsOverride(dnsOverride, appendNameservers.joinToString(","))
     }
 
+    @SuppressLint("NewApi")
     fun loadProfile(path: File, baseDir: File): CompletableFuture<Unit> {
         return Bridge.loadProfile(path.absolutePath, baseDir.absolutePath).thenApply { Unit }
     }
 
+    @SuppressLint("NewApi")
     fun downloadProfile(url: String, output: File, baseDir: File): CompletableFuture<Unit> {
         return Bridge.downloadProfile(url, baseDir.absolutePath, output.absolutePath).thenApply { Unit }
     }
 
+    @SuppressLint("NewApi")
     fun downloadProfile(fd: ParcelFileDescriptor, output: File, baseDir: File): CompletableFuture<Unit> {
         return Bridge.downloadProfile(fd.detachFd(), baseDir.absolutePath, output.absolutePath).thenApply { Unit }
     }
@@ -89,6 +93,7 @@ object Clash {
         return Bridge.setSelector(name, selected)
     }
 
+    @SuppressLint("NewApi")
     fun performHealthCheck(group: String): CompletableFuture<Unit> {
         return Bridge.performHealthCheck(group).thenApply { Unit }
     }

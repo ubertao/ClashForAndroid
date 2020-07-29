@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.text.Html
 import androidx.appcompat.app.AlertDialog
 import com.github.kr328.clash.dump.LogcatDumper
+import com.github.kr328.clash.common.utils.fromHtmlCompat
+import com.github.kr328.clash.common.utils.localesCompat
 import com.google.android.material.snackbar.Snackbar
 import com.microsoft.appcenter.crashes.Crashes
 import com.microsoft.appcenter.crashes.ingestion.models.ErrorAttachmentLog
@@ -26,7 +28,7 @@ class SupportActivity : BaseActivity() {
         commonUi.build {
             tips {
                 icon = getDrawable(R.drawable.ic_info)
-                title = Html.fromHtml(getString(R.string.tips_support), Html.FROM_HTML_MODE_LEGACY)
+                title = fromHtmlCompat(getString(R.string.tips_support), Html.FROM_HTML_MODE_LEGACY)
             }
 
             category(text = getString(R.string.sources))
@@ -82,7 +84,7 @@ class SupportActivity : BaseActivity() {
                 }
             }
 
-            val firstLanguage = resources.configuration.locales.get(0).language
+            val firstLanguage = resources.configuration.localesCompat[0].language
 
             if (firstLanguage.equals("zh", true)) {
                 category(getString(R.string.donate))

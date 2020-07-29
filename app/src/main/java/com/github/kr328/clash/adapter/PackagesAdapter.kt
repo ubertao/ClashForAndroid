@@ -1,5 +1,6 @@
 package com.github.kr328.clash.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
@@ -41,6 +42,7 @@ class PackagesAdapter(
         val checkbox: MaterialCheckBox = view.findViewById(R.id.checkbox)
     }
 
+    @SuppressLint("NewApi")
     suspend fun applyFilter(keyword: String, sort: Sort, decrease: Boolean, systemApp: Boolean) {
         withContext(Dispatchers.Default) {
             val newList = apps.parallelStream()

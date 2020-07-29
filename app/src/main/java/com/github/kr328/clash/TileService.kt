@@ -5,14 +5,17 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.drawable.Icon
+import android.os.Build
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
+import androidx.annotation.RequiresApi
 import com.github.kr328.clash.common.Permissions
 import com.github.kr328.clash.common.ids.Intents
 import com.github.kr328.clash.remote.RemoteUtils
 import com.github.kr328.clash.service.util.startClashService
 import com.github.kr328.clash.service.util.stopClashService
 
+@RequiresApi(Build.VERSION_CODES.N)
 class TileService : TileService() {
     private var currentProfile = ""
     private var clashRunning = false

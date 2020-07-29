@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.Html
+import com.github.kr328.clash.common.utils.fromHtmlCompat
 import kotlinx.android.synthetic.main.activity_application_broken.*
 
 class ApkBrokenActivity : BaseActivity() {
@@ -13,7 +14,7 @@ class ApkBrokenActivity : BaseActivity() {
         setContentView(R.layout.activity_application_broken)
         setSupportActionBar(toolbar)
 
-        text.text = Html.fromHtml(
+        text.text = fromHtmlCompat(
             getString(R.string.application_broken_description),
             Html.FROM_HTML_MODE_COMPACT
         )
